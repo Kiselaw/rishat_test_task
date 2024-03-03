@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+  <title>Product Grid</title>
+  <script src="https://js.stripe.com/v3/"></script>
+  <link href="{% static '/css/bootstrap.css' %}" rel="stylesheet">
+  <style>
+    /* Custom styles can be removed */
+    /* Stripe CSS styles here */
+  </style>
+</head>
+<body>
+  <header class="container-fluid" style="height: 90px; background-color: #EEEDED; display: flex; align-items: center; justify-content: space-between;">
+    <h2>Rishat Stripe Pay</h2>
+    <div class="">
+      <span id="item-count-text" style="font-size:18px;">Items added:</span>
+      <span id="item-count" style="font-size:18px;">0</span>
+      <button id="buy-button" class="btn btn-primary btn-lg" onclick="sendIdList()" disabled>Buy</button>
+    </div>
+  </header>
+  <div class="row p-3">
+  {% for item in items %}
+    <div class="col-md-3 col-lg-4 mb-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title"> {{ item.name }}</h5>
+          <p class="card-text">{{ item.description }}</p>
+          <p class="price" style="font-size:30px;">{{ item.price }}{{ currency }}</p>
+          <button class="buy-button btn btn-primary" item-id="{{ item.id }}" onclick="addIdToOrder(this); sendIdList();">Buy</button>
+          <button class="add-to-order btn btn-secondary" item-id="{{ item.id }}" onclick="addToOrder(this); addIdToOrder(this)">Add to Order</button>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+  </div>
+  <script>
+    var csrftoken = '{{ csrf_token }}';
+    let itemCount = 0;
+    var idList = [];  // Initialize an empty list to store the item ids
+
+    function updateBuyButtonState() {
+      var buyButton = document.getElementById('buy-button');
+      if (idList.length === 0) {
+        buyButton.disabled = true; // Disable the button if idList is empty
+      } else {
+        buyButton.disabled = false; // Enable the button if idList is not empty
+      }
+    }
+    function addToOrder(button) {
+      itemCount++;
+      document.getElementById('item-count').innerText = itemCount;
+      button.disabled = true;
+    }
+    function addIdToOrder(button) {
+      var itemId = button.getAttribute('item-id');
+      idList.push(itemId); // Add the itemId to the idList
+      updateBuyButtonState()
+    }
+    function sendIdList() {
+      fetch('/buy/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrftoken,
+        },
+        body: JSON.stringify({ idList: idList }),
+      })
+      .then(function(response) {
+        console.log(response)
+        return response.json();
+      })
+      .then(function(data) {
+        var stripe = Stripe(data.publishable_key);
+        stripe.redirectToCheckout({
+          sessionId: data.session_id
+        });
+      });
+    }
+  </script>
+</body>
+</html>

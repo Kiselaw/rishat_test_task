@@ -1,0 +1,62 @@
+[
+    {
+        "model": "stripe_pay.Item",
+        "pk": 1,
+        "fields": {
+            "name": "Item_1",
+            "price": 12,
+            "description": "Item_1 description",
+            "currency": "eur"
+        }
+    },
+    {
+        "model": "stripe_pay.Item",
+        "pk": 2,
+        "fields": {
+            "name": "Item_1",
+            "price": 20,
+            "description": "Item_2 description",
+            "currency": "eur"
+        }
+    },
+    {
+        "model": "stripe_pay.Item",
+        "pk": 3,
+        "fields": {
+            "name": "Item_1",
+            "price": 30,
+            "description": "Item_3 description",
+            "currency": "eur"
+        }
+    },
+    {
+        "model": "stripe_pay.Item",
+        "pk": 4,
+        "fields": {
+            "name": "Item_1",
+            "price": 18,
+            "description": "Item_4 description",
+            "currency": "eur"
+        }
+    },
+    {
+        "model": "stripe_pay.Item",
+        "pk": 5,
+        "fields": {
+            "name": "Item_1",
+            "price": 47,
+            "description": "Item_5 description",
+            "currency": "eur"
+        }
+    },
+    {
+        "model": "stripe_pay.Item",
+        "pk": 6,
+        "fields": {
+            "name": "Item_1",
+            "price": 38,
+            "description": "Item_6 description",
+            "currency": "eur"
+        }
+    }
+]

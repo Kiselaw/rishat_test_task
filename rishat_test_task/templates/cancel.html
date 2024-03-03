@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancel</title>
+    <link href="{% static '/css/bootstrap.css' %}" rel="stylesheet">
+    <style>
+        .center-card {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <div class="center-card">
+        <div class="card text-center" style="width: 18rem;">
+            <div class="card-body">
+                <h1 class="card-title text-danger">Payment Canceled</h1>
+                <p class="card-text">Your purchase was canceled.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
