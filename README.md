@@ -1,4 +1,4 @@
-# rishat_test_task
+# Тестовое задание в Ришат
 
 Cсылка на задание - https://drive.google.com/file/d/1Q19S4T3V71JEFR_qiq_qdBIerqubgQG1/view?usp=sharing
 
